@@ -1,6 +1,10 @@
 Drails::Application.routes.draw do
 
-  root to: "drone#index"
-  resources :details, :only=>[:index]
+  root to: "drone#show"
+
+  resource :drone, :only=>[:show] do
+  	get :control
+  	get :configuration
+  end
 
 end

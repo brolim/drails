@@ -8,16 +8,74 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 
+
+  <%= render :partial=>'/layouts/css' %>
+
+  <style type="text/css">
+    a{
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      border: none;
+      border-bottom: solid 2px transparent;
+      margin: 0px;
+      padding: 4px 6px 3px 6px;
+    }
+
+    
+    a.active, a:hover{
+      color: #FF9C54;
+      border-bottom-color: #FF9C54;
+    }
+
+    a:visited {
+      text-decoration: none;
+    }
+
+    .content_title{
+      margin-top:10px;
+      font-size: 1.2em;
+      color: white;      
+      font-weight: bold;
+    }
+
+  </style>
 
 </head>
 
 <body>
 
-  <%= yield %>
+  <div class="container">
+
+    <div class="row" style="margin-bottom:10px;">
+      <div class="col-lg-12" style="border-bottom: solid 2px white; margin-top:5px; padding-bottom:1px;">
+        
+        <%= link_to 'Home', drone_path, :class=>"#{'active' if request.path.gsub(/\?.*/, '') == drone_path}" %>
+        <%= link_to 'Control', control_drone_path, :class=>"#{'active' if request.path.gsub(/\?.*/, '') == control_drone_path}" %>
+        <%= link_to 'Config', configuration_drone_path, :class=>"#{'active' if request.path.gsub(/\?.*/, '') == configuration_drone_path}" %>
+
+        <div style="float:right; color:#FF9C54; font-weight:bold;">
+          Drone in Rails
+        </div>
+
+      </div>
+    </div>
+
+
+    <div class="row">
+
+      <div class="col-lg-12 content_title">
+        <%= yield :title %>
+      </div>
+
+      <div class="col-lg-12">
+        <%= yield %>
+      </div>
+    </div>
+
+  </div>
 
 </body>
 </html>
