@@ -1,6 +1,6 @@
 Drails::Application.routes.draw do
 
-  root to: "drone#show"
+  root to: "drones#show"
 
   resource :drone, :only=>[:show] do
   	get :control
