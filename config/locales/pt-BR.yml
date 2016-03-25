@@ -1,0 +1,17 @@
+"pt-BR":
+  views:
+    pagination:
+      previous: "&#8672;"
+      next: "&#8674;"
+      truncate: "..."
+      first: "&#8676;"
+      last: "&#8677;"
+
+"en":
+  views:
+    pagination:
+      previous: "&#8672;"
+      next: "&#8674;"
+      truncate: "..."
+      first: "&#8676;"
+      last: "&#8677;"
