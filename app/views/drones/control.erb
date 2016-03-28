@@ -207,7 +207,7 @@
 	<div class="col-lg-4" style="margin:20px;">
 		
 		<div>
-			Altitude controller - Z axis
+			Z axis controller
 		</div>
 
 
@@ -274,6 +274,18 @@
 
 	window.step_size = 200; //millis
 
+
+	send_to_raspberry = function(direction){
+		$.ajax({
+			url: "<%= drone_path %>",
+			type: 'put',
+			data: {
+				direction: direction,
+				authenticity_token: '<%= form_authenticity_token %>'
+			},
+		});
+	}
+
 	up = function(button){
 		
 		if (button){
@@ -288,6 +300,7 @@
 			$('.up-down-control .position[position='+ current_position +']').addClass('active');
 		}
 
+		send_to_raspberry('up');
 		window.timeouts.push(setTimeout(up, window.step_size));
 	}
 
@@ -305,6 +318,7 @@
 			$('.up-down-control .position[position='+ current_position +']').addClass('active');
 		}
 
+		send_to_raspberry('down');
 		window.timeouts.push(setTimeout(down, window.step_size));
 	}
 
@@ -322,6 +336,7 @@
 			$('.north-south-control .position[position='+ current_position +']').addClass('active');
 		}
 
+		send_to_raspberry('north');
 		window.timeouts.push(setTimeout(north, window.step_size));
 	}
 
@@ -339,6 +354,7 @@
 			$('.north-south-control .position[position='+ current_position +']').addClass('active');
 		}
 
+		send_to_raspberry('south');
 		window.timeouts.push(setTimeout(south, window.step_size));
 	}
 
@@ -356,6 +372,7 @@
 			$('.west-east-control .position[position='+ current_position +']').addClass('active');
 		}
 
+		send_to_raspberry('east');
 		window.timeouts.push(setTimeout(east, window.step_size));
 	}
 
@@ -373,6 +390,7 @@
 			$('.west-east-control .position[position='+ current_position +']').addClass('active');
 		}
 
+		send_to_raspberry('west');
 		window.timeouts.push(setTimeout(west, window.step_size));
 	}
 

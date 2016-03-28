@@ -9,4 +9,9 @@ class DronesController < ApplicationController
   def configuration
   end
 
+  def update
+  	
+  	render :json=>{'msg'=>'ok'}
+  end
+
 end
