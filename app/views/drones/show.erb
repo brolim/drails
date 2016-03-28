@@ -1,185 +1,406 @@
 <% content_for :title do %>
-	How it will work?
+	Tutorial to make a quadcopter to fly controlling it with your mobile phone
 <% end %>
 
-
 <style type="text/css">
-	.engine, .middleman, .raspberry {
-		display: inline-block;
-		width: 100px;
-		height: 100px;
-		/*border-radius: 50px;*/
-		background: white;
+
+	td {
 		text-align: center;
-		border: solid 1px white;
-	    color: black;
+		vertical-align: middle;
+		border: none;
+		width: 11%;
 	}
 
-	.raspberry{
-		background: #AFF7B4;
-		margin-top: 10px;
-		margin-bottom: 10px;
+	.engine, .middleman, .raspberry, .empty{
+		padding: 20px 4px;
+		background: black;
+		color: white;
+		border: solid 3px;
 	}
 
-	.middleman{
-	    background: #9494E6;
+	.empty{
+		border-color: #222;
+		background: #222;
 	}
 
 	.engine{
-		background: #FF9C54;
+		border-color: white;
+	}
+	
+	.middleman{ 
+		border-color: orange;
+	}
+	
+	.raspberry{
+		border-color: red;
 	}
 
-	.engine div, .middleman div, .raspberry div{
+	#raspberry{
+		background: #E07A7A;
+	    color: #E4CBCB;
+	}
+
+	#engine1, #middleman1 {
+	    background: #4F9060;
+	    color: #B9DCB9;
+	}
+
+	#engine2, #middleman2 {
+	    background: #EFD19B;
+	    color: #988667;
+	} 
+
+	#engine3, #middleman3 {
+		background: #8A8AD0;
+	    color: #E2E2F3;
+	}
+
+	#engine4, #middleman4 {
+	    background: #4C3D50;
+	    color: #AE8CB7;
+	}
+
+	table {
+		/*border-collapse: collapse;*/
+		width: 100%;
+		margin: 0px auto 0px auto;
+	}
+
+	.jumbo{
+		margin-top: 20px;
+		background: #222;
+		padding: 6px 6px;
+		border: solid 1px #555;
+		border-radius: 2px;
+	}
+
+	section .title{
+		padding: 2px 4px 2px 0px;
+		margin-top: 40px;
+		color: #EEE;
+	}
+
+	.y-axis{
+		border-left: solid 1px white;
 		display: inline-block;
-		margin-top:38px;
+		height: 100%;
 	}
 
-	#engine_1, #engine2{
-		float: left;
-	}
-
-	#engine_3, #engine_4{
-		float: right;
-	}
-
-	.drone{
-		width: 50%;
-		margin-top: 10px;
-	}
-
-	.borda_branca{
+	.x-axis{
 		border-top: solid 1px white;
+		width: 100%;
+		height: 1px;
 	}
 
+	ol, ul{
+		margin-bottom: 15px;
+	}
+	
 </style>
 
-	<div style="text-align:center;">
+<section>
+
+	<div class="title">
+		<strong style="font-size:2em; margin-right:10px;">!</strong> 
+		This tutorial is structured in 10 sections and almost all of them are quite independent.
+
+		<ol>
+			<li>
+				Stuff you will need to make it work
+
+				<ul>
+
+					<li style="padding-top:15px;">
+						4 engines and some additional things for it:
+						<ul>
+							
+							<li>
+								1 high dischargeable battery
+							</li>
+
+							<li>
+								Wires and others
+							</li>
+						</ul>
+					</li>
 
 
-		<div class="col-lg-12">
-			
-			<div class="col-lg-2 col-lg-offset-1">
-				<div class="engine">
-					<div>
-						engine 1
-					</div>
-				</div>
-			</div>
+					<li>
+						1 Raspberry Pi 2 and some additional things for it:
+						<ul>
+							
+							<li>
+								1 usb wifi dongle
+							</li>
 
-			<div class="col-lg-2"></div>
-			<div class="col-lg-2"></div>
-			<div class="col-lg-2"></div>
+							<li>
+								1 SD card (at least 8GB)
+							</li>
 
-			<div class="col-lg-2">
-				<div class="engine">
-					<div>
-						engine 2
-					</div>
-				</div>
-			</div>
+							<li>
+								1 power bank for cellphones (output: USB 5V and 2A)
+							</li>
 
-		</div>
+							<li>
+								1  USB - microUSB cable
+							</li>
 
+						</ul>
+					</li>
 
-
-
-		<div class="col-lg-12">
-			
-			<div class="col-lg-2 col-lg-offset-1"></div>
-			
-			<div class="col-lg-2">
-				<div class="middleman col-lg-6">
-					<div>
-						middleman 1
-					</div>
-				</div>
-
-				<div class="borda_branca col-lg-5"></div>
-			</div>
-
-			<div class="col-lg-2"></div>
-			
-			<div class="col-lg-2">
-				<div class="middleman">
-					<div>
-						middleman 2
-					</div>
-				</div>
-			</div>
-
-			<div class="col-lg-2"></div>
-
-		</div>
+					
+					<li>
+						4 middlemans to translate data between engines and Raspberry
+					</li>
 
 
+				</ul>
+			</li>
 
-		<div class="col-lg-12">
-			
-			<div class="col-lg-2 col-lg-offset-1"></div>
-			<div class="col-lg-2"></div>
+			<li>
+				Putting things together
+			</li>
 
-			<div class="col-lg-2">
-				<div class="raspberry">
-					<div>
-						raspberry
-					</div>
-				</div>
-			</div>
+			<li>
 
-			<div class="col-lg-2"></div>
-			<div class="col-lg-2"></div>
+				Setting up your Raspberry Pi
 
-		</div>
+				<ul>
 
-		<div class="col-lg-12">
-			
-			<div class="col-lg-2 col-lg-offset-1"></div>
-			
-			<div class="col-lg-2">
-				<div class="middleman">
-					<div>
-						middleman 3
-					</div>
-				</div>
-			</div>
+					<li>
+						Install Raspbian Lite distro
+					</li>
 
-			<div class="col-lg-2"></div>
-			
-			<div class="col-lg-2">
-				<div class="middleman">
-					<div>
-						middleman 4
-					</div>
-				</div>
-			</div>
+					<li>
+						Update Raspbian OS via SSH
+					</li>
 
-			<div class="col-lg-2"></div>
+					<li>
+						Make Wifi dongle to work
+					</li>
 
-		</div>
+					<li>
+						Make your Raspbian into a router
+					</li>
 
-		<div class="col-lg-12">
-			
-			<div class="col-lg-2 col-lg-offset-1">
-				<div class="engine">
-					<div>
-						engine 3
-					</div>
-				</div>
-			</div>
+					<li>
+						Install Ruby on Rails
+					</li>
 
-			<div class="col-lg-2"></div>
-			<div class="col-lg-2"></div>
-			<div class="col-lg-2"></div>
+					<li>
+						Download Drails and run it on Raspbian
+					</li>
 
-			<div class="col-lg-2">
-				<div class="engine">
-					<div>
-						engine 4
-					</div>
-				</div>
-			</div>
+					<li>
+						Connect your phone to Drails
+					</li>
 
-		</div>
+					<li>
+						Configure firewall and enviromental security
+					</li>
 
+				</ul>
+			</li>
+
+			<li>
+				Flying your Quadcopter
+			</li>
+
+		</ol>
+	</div>
+
+
+	<div class="subtitle">
+		
+	</div>
+
+	<div class="jumbo">
+		
+		<table>
+
+			<tr>
+				<td colspan="3" class="empty">
+					<b>2th</b> 
+					arm
+				</td>
+				
+				<td>
+					<div class="y-axis"></div>	
+				</td>
+
+				<td colspan="3" class="empty">
+					<b>1th</b> 
+					arm
+				</td>
+			</tr>
+
+
+			<tr>
+				<td class="empty">&nbsp;</td>
+				<td></td>
+				<td></td>
+				
+				<td>
+					<div class="y-axis"></div>	
+				</td>
+
+				<td></td>
+				<td></td>
+				<td class="empty">&nbsp;</td>
+			</tr>
+
+
+			<tr>
+				<td></td>
+
+				<td id="engine2" class="engine">
+					engine 2
+				</td>
+
+				<td></td>
+				
+				<td>
+					<div class="y-axis"></div>	
+				</td>
+
+				<td></td>
+
+				<td id="engine1" class="engine">
+					engine 1
+				</td>
+				
+				<td></td>
+			</tr>
+
+
+			<tr>
+				<td></td>
+				<td></td>
+
+				<td id="middleman2" class="middleman">
+					middleman 2
+				</td>
+
+				<td>
+					<div class="y-axis"></div>	
+				</td>
+
+				<td id="middleman1" class="middleman">
+					middleman 1
+				</td>
+				
+				<td></td>
+				<td></td>
+			</tr>
+
+
+			<tr>
+				<td>
+					<div class="x-axis"></div>	
+				</td>
+
+				<td>
+					<div class="x-axis"></div>	
+				</td>
+
+				<td>
+					<div class="x-axis"></div>	
+				</td>
+
+				<td id="raspberry" class="raspberry">
+					raspberry
+				</td>
+
+				<td>
+					<div class="x-axis"></div>	
+				</td>
+
+				<td>
+					<div class="x-axis"></div>	
+				</td>
+
+				<td>
+					<div class="x-axis"></div>	
+				</td>
+			</tr>
+
+
+			<tr>
+				<td></td>
+				<td></td>
+
+				<td id="middleman3" class="middleman">
+					middleman 3
+				</td>
+
+				<td>
+					<div class="y-axis"></div>	
+				</td>
+
+				<td id="middleman4" class="middleman">
+					middleman 4
+				</td>
+				
+				<td></td>
+				<td></td>
+			</tr>
+
+
+			<tr>
+				<td></td>
+
+				<td id="engine3" class="engine">
+					engine 3
+				</td>
+
+				<td></td>
+				
+				<td>
+					<div class="y-axis"></div>	
+				</td>
+
+				<td></td>
+
+				<td id="engine4" class="engine">
+					engine 4
+				</td>
+
+				<td></td>
+			</tr>
+
+
+			<tr>
+				<td class="empty">&nbsp;</td>
+				<td></td>
+				<td></td>
+				
+				<td>
+					<div class="y-axis"></div>	
+				</td>
+
+				<td></td>
+				<td></td>
+				<td class="empty">&nbsp;</td>
+			</tr>
+
+			<tr>
+				<td colspan="3" class="empty">
+					<b>3th</b> 
+					arm
+				</td>
+				
+				<td>
+					<div class="y-axis"></div>	
+				</td>
+
+				<td colspan="3" class="empty">
+					<b>4th</b> 
+					arm
+				</td>
+			</tr>
+
+		</table>
 	</div>
 	
+
+</section>

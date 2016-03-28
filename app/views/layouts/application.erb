@@ -52,7 +52,7 @@
     <div class="row" style="margin-bottom:10px;">
       <div class="col-lg-12" style="border-bottom: solid 2px white; margin-top:5px; padding-bottom:1px;">
         
-        <%= link_to 'Home', drone_path, :class=>"#{'active' if request.path.gsub(/\?.*/, '') == drone_path}" %>
+        <%= link_to 'Home', drone_path, :class=>"#{'active' if [drone_path, root_path].include?(request.path.gsub(/\?.*/, ''))}" %>
         <%= link_to 'Control', control_drone_path, :class=>"#{'active' if request.path.gsub(/\?.*/, '') == control_drone_path}" %>
         <%= link_to 'Config', configuration_drone_path, :class=>"#{'active' if request.path.gsub(/\?.*/, '') == configuration_drone_path}" %>
 
