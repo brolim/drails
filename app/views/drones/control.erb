@@ -1,5 +1,5 @@
 <% content_for :title do %>
-	Control
+	Control your drone actions from here
 <% end %>
 
 <style type="text/css">
@@ -9,18 +9,18 @@
 		text-align: center;
 	}
 
-	.directions .left, .directions .right, .directions .up, .directions .down {
+	.directions .west, .directions .east, .directions .north, .directions .south, .directions .nw, .directions .ne, .directions .sw, .directions .se, .directions .up, .directions .down {
 		background: #333;
 		margin: 2px;
 		padding: 20px 0px;
 		border: solid 2px transparent;
 	}
 
-	.directions .left:hover, .directions .right:hover, .directions .up:hover, .directions .down:hover {
+	.directions .west:hover, .directions .east:hover, .directions .north:hover, .directions .south:hover, .directions .nw:hover, .directions .ne:hover, .directions .sw:hover, .directions .se:hover, .directions .up:hover, .directions .down:hover {
 		border-color: white;
 	}
 
-	.left-right-control .position, .up-down-control .position{
+	.west-east-control .position, .north-south-control .position, .up-down-control .position{
 	    width: 100%;
 	    height: 20px;
 	    margin: 10px 0px;
@@ -28,15 +28,19 @@
 	    font-size: 0.45em;
 	}
 
-	.up-down-control .position{
+	.north-south-control .position, .up-down-control .position{
 		width: 30px;
 		margin: 0px;
 	    height: 32px;
 		text-align: center;
 	}
 
-	.left-right-control .position.active, .up-down-control .position.active {
+	.west-east-control .position.active, .north-south-control .position.active, .up-down-control .position.active {
 	    background: #CE6666;
+	}
+
+	.directions .button.active {
+		background-color: #999;
 	}
 
 	.directions {
@@ -51,53 +55,43 @@
 </style>
 
 
-<div class="row">
+<div class="row directions">
 
-	<p>Press mouse and release here.</p>
- 
-<script>
-$( "p" )
-  .mouseup(function() {
-    $( this ).append( "<span style='color:#f00;'>Mouse up.</span>" );
-  })
-  .mousedown(function() {
-    $( this ).append( "<span style='color:#00f;'>Mouse down.</span>" );
-  });
-</script>
+	<div class="col-lg-6" style="margin-top:20px;">
 
-
-	<div class="directions col-lg-6">
+		X and Y axis controller
+		<br>
 		
-		<div class="left-right-control col-lg-12">
+		<div class="west-east-control col-lg-12">
 
 			<div class="col-lg-1">
-				<div position='-3' class="position position_minus_3">
+				<div position='-3' class="position">
 					&lArr;
 				</div>	
 			</div>
 
 			<div class="col-lg-2">
-				<div position='-2' class="position position_minus_2"></div>	
+				<div position='-2' class="position"></div>	
 			</div>
 
 			<div class="col-lg-2">
-				<div position='-1' class="position position_minus_1"></div>	
+				<div position='-1' class="position"></div>	
 			</div>
 
 			<div class="col-lg-2">
-				<div position='0' class="position position_0 active"></div>	
+				<div position='0' class="position active"></div>	
 			</div>
 
 			<div class="col-lg-2">
-				<div position='1' class="position position_plus_1"></div>	
+				<div position='1' class="position"></div>	
 			</div>
 
 			<div class="col-lg-2">
-				<div position='2' class="position position_plus_2"></div>	
+				<div position='2' class="position"></div>	
 			</div>
 
 			<div class="col-lg-1">
-				<div position='3' class="position position_plus_3">
+				<div position='3' class="position">
 					&rArr;
 				</div>	
 			</div>
@@ -107,25 +101,37 @@ $( "p" )
 
 		<div class="col-lg-12">
 
-			<div class="col-lg-6 col-lg-offset-3">
-				<div class="up">
+			<div class="col-lg-3">
+				<div class="button nw">
+					&nwArr;
+				</div>
+			</div>
+
+			<div class="col-lg-6">
+				<div class="button north">
 					&uArr;
 				</div>
 			</div>
 			
+			<div class="col-lg-3">
+				<div class="button ne">
+					&neArr;
+				</div>
+			</div>
+
 		</div>
 
 
 		<div class="col-lg-12">
 		
 			<div class="col-lg-6">
-				<div class="left">
+				<div class="button west">
 					&lArr;
 				</div>
 			</div>
 
 			<div class="col-lg-6">
-				<div class="right">
+				<div class="button east">
 					&rArr;
 				</div>
 			</div>
@@ -135,20 +141,36 @@ $( "p" )
 
 		<div class="col-lg-12">
 
-			<div class="col-lg-6 col-lg-offset-3">
-				<div class="down">
+			<div class="col-lg-3">
+				<div class="button sw">
+					&swArr;
+				</div>
+			</div>
+
+			<div class="col-lg-6">
+				<div class="button south">
 					&dArr;
 				</div>
 			</div>
+			
+			<div class="col-lg-3">
+				<div class="button se">
+					&seArr;
+				</div>
+			</div>
+
 			
 		</div>
 
 	</div>
 
 
-	<div class="col-lg-1" style="font-size:2em; margin:35px 0px 0px 15px;">
+	<div class="col-lg-1" style="margin:55px 0px 0px 15px;">
+		
+		&nbsp;
+		<br>
 
-		<div class="up-down-control">
+		<div class="north-south-control">
 
 			<div position="3" class="position">
 				&uArr;
@@ -180,6 +202,68 @@ $( "p" )
 
 		</div>
 	</div>
+
+
+	<div class="col-lg-4" style="margin:20px;">
+		
+		<div>
+			Altitude controller - Z axis
+		</div>
+
+
+		<div class="up-down-control col-lg-8" style="margin:43px 15px 0px 0px;">
+
+			<div class="col-lg-12">
+
+				<div class="button up">
+					&uArr;
+				</div>
+
+			
+				<div class="button down">
+					&dArr;
+				</div>
+
+			</div>
+
+		</div>
+
+
+		<div class="up-down-control col-lg-3" style="margin-top:35px;">
+
+			<div position="3" class="position">
+				&uArr;
+			</div>	
+
+			<div position="2" class="position">
+				&nbsp;
+			</div>	
+
+			<div position="1" class="position">
+				&nbsp;
+			</div>	
+
+			<div position="0" class="position active">
+				&nbsp;
+			</div>	
+
+			<div position="-1" class="position">
+				&nbsp;
+			</div>	
+
+			<div position="-2" class="position">
+				&nbsp;
+			</div>	
+
+			<div position="-3" class="position">
+				<div style="padding-top:13px;">&dArr;</div>
+			</div>	
+
+		</div>
+
+
+
+	</div>
 	
 </div>
 
@@ -190,7 +274,12 @@ $( "p" )
 
 	window.step_size = 200; //millis
 
-	up = function(){
+	up = function(button){
+		
+		if (button){
+			button.addClass('active');
+		}
+
 		var current_position = parseInt($('.up-down-control .position.active').attr('position'));
 		current_position += 1;
 
@@ -202,7 +291,12 @@ $( "p" )
 		window.timeouts.push(setTimeout(up, window.step_size));
 	}
 
-	down = function(){
+	down = function(button){
+		
+		if (button){
+			button.addClass('active');
+		}
+
 		var current_position = parseInt($('.up-down-control .position.active').attr('position'));
 		current_position -= 1;
 
@@ -214,33 +308,119 @@ $( "p" )
 		window.timeouts.push(setTimeout(down, window.step_size));
 	}
 
-	right = function(){
-		var current_position = parseInt($('.left-right-control .position.active').attr('position'));
+	north = function(button){
+		
+		if (button){
+			button.addClass('active');
+		}
+
+		var current_position = parseInt($('.north-south-control .position.active').attr('position'));
 		current_position += 1;
 
 		if(current_position <= 3){
-			$('.left-right-control .position').removeClass('active');
-			$('.left-right-control .position[position='+ current_position +']').addClass('active');
+			$('.north-south-control .position').removeClass('active');
+			$('.north-south-control .position[position='+ current_position +']').addClass('active');
 		}
 
-		window.timeouts.push(setTimeout(right, window.step_size));
+		window.timeouts.push(setTimeout(north, window.step_size));
 	}
 
-	left = function(){
-		var current_position = parseInt($('.left-right-control .position.active').attr('position'));
+	south = function(button){
+		
+		if (button){
+			button.addClass('active');
+		}
+
+		var current_position = parseInt($('.north-south-control .position.active').attr('position'));
 		current_position -= 1;
 
 		if(current_position >= -3){
-			$('.left-right-control .position').removeClass('active');
-			$('.left-right-control .position[position='+ current_position +']').addClass('active');
+			$('.north-south-control .position').removeClass('active');
+			$('.north-south-control .position[position='+ current_position +']').addClass('active');
 		}
 
-		window.timeouts.push(setTimeout(left, window.step_size));
+		window.timeouts.push(setTimeout(south, window.step_size));
+	}
+
+	east = function(button){
+		
+		if (button){
+			button.addClass('active');
+		}
+
+		var current_position = parseInt($('.west-east-control .position.active').attr('position'));
+		current_position += 1;
+
+		if(current_position <= 3){
+			$('.west-east-control .position').removeClass('active');
+			$('.west-east-control .position[position='+ current_position +']').addClass('active');
+		}
+
+		window.timeouts.push(setTimeout(east, window.step_size));
+	}
+
+	west = function(button){
+		
+		if (button){
+			button.addClass('active');
+		}
+
+		var current_position = parseInt($('.west-east-control .position.active').attr('position'));
+		current_position -= 1;
+
+		if(current_position >= -3){
+			$('.west-east-control .position').removeClass('active');
+			$('.west-east-control .position[position='+ current_position +']').addClass('active');
+		}
+
+		window.timeouts.push(setTimeout(west, window.step_size));
+	}
+
+
+	sw = function(button){
+		west(button);
+		south(button);
+	}
+
+
+	se = function(button){
+		east(button);
+		south(button);
+	}
+
+
+
+	nw = function(button){
+		west(button);
+		north(button);
+	}
+
+	ne = function(button){
+		east(button);
+		north(button);
 	}
 
 	back_middle = function () {
+		
 		$('.position').removeClass('active');
 		$('.position[position=0]').addClass('active');
+
+		var css_selector = ".directions .north";
+		css_selector += ", .directions .south";
+		css_selector += ", .directions .west";
+		css_selector += ", .directions .east";
+
+		css_selector += ", .directions .sw";
+		css_selector += ", .directions .se";
+
+		css_selector += ", .directions .nw";
+		css_selector += ", .directions .ne";
+
+		css_selector += ", .directions .up";
+		css_selector += ", .directions .down";
+
+		$(css_selector).removeClass('active');
+
 		window.timeouts.forEach(function(timeout_id){
 			clearTimeout(timeout_id);
 		});
@@ -250,12 +430,21 @@ $( "p" )
 	window.timeouts = [];
 
 	$(function(){
-		$('.directions .up').mousedown(function(){up();});
-		$('.directions .down').mousedown(function(){down();});
-		$('.directions .left').mousedown(function(){left();});
-		$('.directions .right').mousedown(function(){right();});
+		$('.directions .north').mousedown(function(){north($(this));});
+		$('.directions .south').mousedown(function(){south($(this));});
+		$('.directions .west').mousedown(function(){west($(this));});
+		$('.directions .east').mousedown(function(){east($(this));});
+		
+		$('.directions .sw').mousedown(function(){sw($(this));});
+		$('.directions .se').mousedown(function(){se($(this));});
 
-		$('body').mouseup(function(){back_middle();});
+		$('.directions .nw').mousedown(function(){nw($(this));});
+		$('.directions .ne').mousedown(function(){ne($(this));});
+
+		$('.directions .up').mousedown(function(){up($(this));});
+		$('.directions .down').mousedown(function(){down($(this));});
+
+		$(window).mouseup(function(){back_middle();});
 	});
 
 </script>
