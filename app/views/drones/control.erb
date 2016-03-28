@@ -2,7 +2,216 @@
 	Control
 <% end %>
 
+<style type="text/css">
+	
+	.directions{
+		font-size: 2em;
+		text-align: center;
+	}
 
-<div>
+	.directions .left, .directions .right, .directions .up, .directions .down {
+		background: #333;
+		margin: 2px;
+		padding: 20px 0px;
+		border: solid 2px transparent;
+	}
+
+	.directions .left:hover, .directions .right:hover, .directions .up:hover, .directions .down:hover {
+		border-color: white;
+	}
+
+	.left-right-control .position, .up-down-control .position{
+	    width: 100%;
+	    height: 20px;
+	    margin: 10px 0px;
+	    border: solid 1px white;
+	    font-size: 0.45em;
+	}
+
+	.up-down-control .position{
+		width: 30px;
+		margin: 0px;
+	    height: 32px;
+		text-align: center;
+	}
+
+	.left-right-control .position.active, .up-down-control .position.active {
+	    background: #CE6666;
+	}
+
+</style>
+
+
+<div class="row">
+
+
+	<div class="directions col-lg-6">
+		
+		<div class="left-right-control col-lg-12">
+
+			<div class="col-lg-1">
+				<div position='-3' class="position position_minus_3">
+					&lArr;
+				</div>	
+			</div>
+
+			<div class="col-lg-2">
+				<div position='-2' class="position position_minus_2"></div>	
+			</div>
+
+			<div class="col-lg-2">
+				<div position='-1' class="position position_minus_1"></div>	
+			</div>
+
+			<div class="col-lg-2">
+				<div position='0' class="position position_0 active"></div>	
+			</div>
+
+			<div class="col-lg-2">
+				<div position='1' class="position position_plus_1"></div>	
+			</div>
+
+			<div class="col-lg-2">
+				<div position='2' class="position position_plus_2"></div>	
+			</div>
+
+			<div class="col-lg-1">
+				<div position='3' class="position position_plus_3">
+					&rArr;
+				</div>	
+			</div>
+
+		</div>
+
+
+		<div class="col-lg-12">
+
+			<div class="col-lg-6 col-lg-offset-3">
+				<div class="up">
+					&uArr;
+				</div>
+			</div>
+			
+		</div>
+
+
+		<div class="col-lg-12">
+		
+			<div class="col-lg-6">
+				<div class="left">
+					&lArr;
+				</div>
+			</div>
+
+			<div class="col-lg-6">
+				<div class="right">
+					&rArr;
+				</div>
+			</div>
+
+		</div>
+
+
+		<div class="col-lg-12">
+
+			<div class="col-lg-6 col-lg-offset-3">
+				<div class="down">
+					&dArr;
+				</div>
+			</div>
+			
+		</div>
+
+	</div>
+
+
+	<div class="col-lg-1" style="font-size:2em; margin:35px 0px 0px 15px;">
+
+		<div class="up-down-control">
+
+			<div position="3" class="position">
+				&uArr;
+			</div>	
+
+			<div position="2" class="position">
+				&nbsp;
+			</div>	
+
+			<div position="1" class="position">
+				&nbsp;
+			</div>	
+
+			<div position="0" class="position active">
+				&nbsp;
+			</div>	
+
+			<div position="-1" class="position">
+				&nbsp;
+			</div>	
+
+			<div position="-2" class="position">
+				&nbsp;
+			</div>	
+
+			<div position="-3" class="position">
+				<div style="padding-top:13px;">&dArr;</div>
+			</div>	
+
+		</div>
+	</div>
 	
 </div>
+
+
+
+
+<script type="text/javascript">
+
+	up = function(){
+		var current_position = parseInt($('.up-down-control .position.active').attr('position'));
+		current_position += 1;
+
+		if(current_position <= 3){
+			$('.up-down-control .position').removeClass('active');
+			$('.up-down-control .position[position='+ current_position +']').addClass('active');
+		}
+	}
+
+	down = function(){
+		var current_position = parseInt($('.up-down-control .position.active').attr('position'));
+		current_position -= 1;
+
+		if(current_position >= -3){
+			$('.up-down-control .position').removeClass('active');
+			$('.up-down-control .position[position='+ current_position +']').addClass('active');
+		}
+	}
+
+	right = function(){
+		var current_position = parseInt($('.left-right-control .position.active').attr('position'));
+		current_position += 1;
+
+		if(current_position <= 3){
+			$('.left-right-control .position').removeClass('active');
+			$('.left-right-control .position[position='+ current_position +']').addClass('active');
+		}
+	}
+
+	left = function(){
+		var current_position = parseInt($('.left-right-control .position.active').attr('position'));
+		current_position -= 1;
+
+		if(current_position >= -3){
+			$('.left-right-control .position').removeClass('active');
+			$('.left-right-control .position[position='+ current_position +']').addClass('active');
+		}
+	}
+
+	$(function(){
+		$('.directions .up').click(function(){up();});
+		$('.directions .down').click(function(){down();});
+		$('.directions .left').click(function(){left();});
+		$('.directions .right').click(function(){right();});
+	});
+
+</script>
