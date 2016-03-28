@@ -39,10 +39,31 @@
 	    background: #CE6666;
 	}
 
+	.directions {
+	    -webkit-touch-callout: none;
+	    -webkit-user-select: none;
+	    -khtml-user-select: none;
+	    -moz-user-select: none;
+	    -ms-user-select: none;
+	    user-select: none;
+	}
+
 </style>
 
 
 <div class="row">
+
+	<p>Press mouse and release here.</p>
+ 
+<script>
+$( "p" )
+  .mouseup(function() {
+    $( this ).append( "<span style='color:#f00;'>Mouse up.</span>" );
+  })
+  .mousedown(function() {
+    $( this ).append( "<span style='color:#00f;'>Mouse down.</span>" );
+  });
+</script>
 
 
 	<div class="directions col-lg-6">
@@ -167,6 +188,8 @@
 
 <script type="text/javascript">
 
+	window.step_size = 200; //millis
+
 	up = function(){
 		var current_position = parseInt($('.up-down-control .position.active').attr('position'));
 		current_position += 1;
@@ -175,6 +198,8 @@
 			$('.up-down-control .position').removeClass('active');
 			$('.up-down-control .position[position='+ current_position +']').addClass('active');
 		}
+
+		window.timeouts.push(setTimeout(up, window.step_size));
 	}
 
 	down = function(){
@@ -185,6 +210,8 @@
 			$('.up-down-control .position').removeClass('active');
 			$('.up-down-control .position[position='+ current_position +']').addClass('active');
 		}
+
+		window.timeouts.push(setTimeout(down, window.step_size));
 	}
 
 	right = function(){
@@ -195,6 +222,8 @@
 			$('.left-right-control .position').removeClass('active');
 			$('.left-right-control .position[position='+ current_position +']').addClass('active');
 		}
+
+		window.timeouts.push(setTimeout(right, window.step_size));
 	}
 
 	left = function(){
@@ -205,13 +234,28 @@
 			$('.left-right-control .position').removeClass('active');
 			$('.left-right-control .position[position='+ current_position +']').addClass('active');
 		}
+
+		window.timeouts.push(setTimeout(left, window.step_size));
 	}
 
+	back_middle = function () {
+		$('.position').removeClass('active');
+		$('.position[position=0]').addClass('active');
+		window.timeouts.forEach(function(timeout_id){
+			clearTimeout(timeout_id);
+		});
+		window.timeouts = [];
+	}
+
+	window.timeouts = [];
+
 	$(function(){
-		$('.directions .up').click(function(){up();});
-		$('.directions .down').click(function(){down();});
-		$('.directions .left').click(function(){left();});
-		$('.directions .right').click(function(){right();});
+		$('.directions .up').mousedown(function(){up();});
+		$('.directions .down').mousedown(function(){down();});
+		$('.directions .left').mousedown(function(){left();});
+		$('.directions .right').mousedown(function(){right();});
+
+		$('body').mouseup(function(){back_middle();});
 	});
 
 </script>
