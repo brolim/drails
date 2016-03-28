@@ -1,9 +1,18 @@
 
-namespace :drails do
+namespace :quadcopter do
   
   desc "description"
-  task :some_task => :environment do
+  task :start => :environment do
 
+	Quadcopter.start
+
+  	while true
+	  	Dir["directions/*"].sort.each do |file_name|
+			Quadcopter.move(file_name.split(' ').last)
+	  		File.delete(file_name)
+	  	end
+	  	sleep 0.1
+  	end
   end
 
 end
